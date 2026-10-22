@@ -1,0 +1,11 @@
+{
+  "cases": 100,
+  "improved": 58,
+  "equal": 42,
+  "mean_relative_reduction_percent": 4.4777806698812945,
+  "aggregate_reduction_percent": 4.566373762719889,
+  "mean_baseline_planning_ms": 0.1946316999992348,
+  "mean_optimized_planning_ms": 23.016575630000062,
+  "llm_calls": 0,
+  "model": "Synthetic synchronous 2D scenes, six physical operations per case, known DAG."
+}

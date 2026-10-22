@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "speed": 1.0,
+    "radius": 10.0,
+    "span": 10.0
+  },
+  "tasks": [
+    {
+      "id": "left_short",
+      "kind": "operate",
+      "pos": [
+        -1,
+        0
+      ],
+      "duration": 1
+    },
+    {
+      "id": "left_long",
+      "kind": "operate",
+      "pos": [
+        -2,
+        0
+      ],
+      "duration": 10
+    },
+    {
+      "id": "right_long",
+      "kind": "operate",
+      "pos": [
+        1,
+        0
+      ],
+      "duration": 9
+    },
+    {
+      "id": "right_short",
+      "kind": "operate",
+      "pos": [
+        2,
+        0
+      ],
+      "duration": 1
+    },
+    {
+      "id": "end",
+      "kind": "complete",
+      "pos": [
+        0,
+        0
+      ],
+      "deps": [
+        "left_short",
+        "left_long",
+        "right_long",
+        "right_short"
+      ],
+      "duration": 0
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "baseline": {
+    "mode": "baseline",
+    "execution_seconds": 6.0,
+    "distance": 4.0,
+    "stages": [
+      {
+        "left": "take_apple",
+        "right": "open",
+        "time": 2.0,
+        "distance": 1.0,
+        "done_before": [],
+        "held_before": [
+          null,
+          null
+        ]
+      },
+      {
+        "left": "put_apple",
+        "right": "take_mug",
+        "time": 2.0,
+        "distance": 2.0,
+        "done_before": [
+          "open",
+          "take_apple"
+        ],
+        "held_before": [
+          "apple",
+          null
+        ]
+      },
+      {
+        "left": null,
+        "right": "put_mug",
+        "time": 2.0,
+        "distance": 1.0,
+        "done_before": [
+          "open",
+          "put_apple",
+          "take_apple",
+          "take_mug"
+        ],
+        "held_before": [
+          null,
+          "mug"
+        ]
+      }
+    ],
+    "planning_ms": 0.08768600000053084,
+    "states": 0,
+    "llm_calls": 0
+  },
+  "optimized": {
+    "mode": "optimized",
+    "execution_seconds": 6.0,
+    "distance": 4.0,
+    "stages": [
+      {
+        "left": null,
+        "right": "open",
+        "time": 2.0,
+        "distance": 0.0,
+        "done_before": [],
+        "held_before": [
+          null,
+          null
+        ]
+      },
+      {
+        "left": "take_apple",
+        "right": "take_mug",
+        "time": 2.0,
+        "distance": 2.0,
+        "done_before": [
+          "open"
+        ],
+        "held_before": [
+          null,
+          null
+        ]
+      },
+      {
+        "left": "put_apple",
+        "right": "put_mug",
+        "time": 2.0,
+        "distance": 2.0,
+        "done_before": [
+          "open",
+          "take_apple",
+          "take_mug"
+        ],
+        "held_before": [
+          "apple",
+          "mug"
+        ]
+      }
+    ],
+    "planning_ms": 0.5603500000006534,
+    "states": 49,
+    "llm_calls": 0
+  }
+}

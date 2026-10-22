@@ -1,0 +1,81 @@
+{
+  "parameters": {
+    "speed": 1.0,
+    "radius": 10.0,
+    "span": 10.0
+  },
+  "tasks": [
+    {
+      "id": "open",
+      "kind": "operate",
+      "pos": [
+        1,
+        0
+      ],
+      "duration": 2
+    },
+    {
+      "id": "take_mug",
+      "kind": "occupy",
+      "pos": [
+        1,
+        1
+      ],
+      "deps": [
+        "open"
+      ],
+      "chain": "mug",
+      "duration": 1
+    },
+    {
+      "id": "put_mug",
+      "kind": "release",
+      "pos": [
+        1,
+        0
+      ],
+      "deps": [
+        "take_mug",
+        "open"
+      ],
+      "chain": "mug",
+      "duration": 1
+    },
+    {
+      "id": "take_apple",
+      "kind": "occupy",
+      "pos": [
+        -1,
+        1
+      ],
+      "chain": "apple",
+      "duration": 1
+    },
+    {
+      "id": "put_apple",
+      "kind": "release",
+      "pos": [
+        -1,
+        0
+      ],
+      "deps": [
+        "take_apple"
+      ],
+      "chain": "apple",
+      "duration": 1
+    },
+    {
+      "id": "end",
+      "kind": "complete",
+      "pos": [
+        0,
+        0
+      ],
+      "deps": [
+        "put_mug",
+        "put_apple"
+      ],
+      "duration": 0
+    }
+  ]
+}

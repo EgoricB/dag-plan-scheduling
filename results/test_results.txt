@@ -1,0 +1,19 @@
+test_baseline_distance (test_dag_plan.PlannerTests.test_baseline_distance) ... ok
+test_cycle (test_dag_plan.PlannerTests.test_cycle) ... ok
+test_demo (test_dag_plan.PlannerTests.test_demo) ... ok
+test_duplicate (test_dag_plan.PlannerTests.test_duplicate) ... ok
+test_external_guard (test_dag_plan.PlannerTests.test_external_guard) ... ok
+test_fixed_workspace (test_dag_plan.PlannerTests.test_fixed_workspace) ... ok
+test_holding (test_dag_plan.PlannerTests.test_holding) ... ok
+test_incomplete_chain (test_dag_plan.PlannerTests.test_incomplete_chain) ... ok
+test_independent_enumeration (test_dag_plan.PlannerTests.test_independent_enumeration) ... ok
+test_no_llm (test_dag_plan.PlannerTests.test_no_llm) ... ok
+test_size_limit (test_dag_plan.PlannerTests.test_size_limit) ... ok
+test_two_hands (test_dag_plan.PlannerTests.test_two_hands) ... ok
+test_unknown_dependency (test_dag_plan.PlannerTests.test_unknown_dependency) ... ok
+test_unreachable (test_dag_plan.PlannerTests.test_unreachable) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.007s
+
+OK

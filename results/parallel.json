@@ -1,0 +1,72 @@
+{
+  "baseline": {
+    "mode": "baseline",
+    "execution_seconds": 20.0,
+    "distance": 2.0,
+    "stages": [
+      {
+        "left": "left_short",
+        "right": "right_long",
+        "time": 9.0,
+        "distance": 0.0,
+        "done_before": [],
+        "held_before": [
+          null,
+          null
+        ]
+      },
+      {
+        "left": "left_long",
+        "right": "right_short",
+        "time": 11.0,
+        "distance": 2.0,
+        "done_before": [
+          "left_short",
+          "right_long"
+        ],
+        "held_before": [
+          null,
+          null
+        ]
+      }
+    ],
+    "planning_ms": 0.11149700000601115,
+    "states": 0,
+    "llm_calls": 0
+  },
+  "optimized": {
+    "mode": "optimized",
+    "execution_seconds": 13.0,
+    "distance": 3.0,
+    "stages": [
+      {
+        "left": "left_long",
+        "right": "right_long",
+        "time": 11.0,
+        "distance": 1.0,
+        "done_before": [],
+        "held_before": [
+          null,
+          null
+        ]
+      },
+      {
+        "left": "left_short",
+        "right": "right_short",
+        "time": 2.0,
+        "distance": 2.0,
+        "done_before": [
+          "left_long",
+          "right_long"
+        ],
+        "held_before": [
+          null,
+          null
+        ]
+      }
+    ],
+    "planning_ms": 2.2080560000006244,
+    "states": 113,
+    "llm_calls": 0
+  }
+}
