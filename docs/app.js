@@ -22,11 +22,11 @@ function load(){
  playing=false;time=0;lastStamp=null;const item=D.scenes[key];
  models={baseline:model(item.scene,item.plans.baseline),optimized:model(item.scene,item.plans.optimized)};
  maxTime=Math.max(...Object.values(models).map(m=>m.plan.execution_seconds));$("scrub").max=maxTime;
- $("scenario-description").textContent=key==="parallel"?"Четыре независимые операции и общий узел завершения. Длительные действия выгодно совмещать — даже если для этого приходится пройти дальше.":"Две цепочки «захват → освобождение» и открытие ящика. Здесь точный поиск даёт другое расписание, но не сокращает итоговое время. Равенство тоже результат.";
+ $("scenario-description").textContent=key==="parallel"?"Сценарий включает четыре независимые операции и терминальный узел. Различие длительностей позволяет оценить влияние локального критерия расстояний на время завершения.":"Сценарий включает две цепочки удержания и операцию открытия ящика. Политики формируют различные расписания с одинаковым временем завершения.";
  ["baseline","optimized"].forEach(m=>{const p=models[m].plan;$(m==="baseline"?"base-total":"opt-total").textContent=fmt(p.execution_seconds,0)+" с";
-  $(m+"-metrics").innerHTML=`<div><b>${fmt(p.distance,0)}</b>ед. пути</div><div><b>${fmt(p.planning_ms,3)} мс</b>расчёт плана</div><div><b>${p.states}</b>состояний в кэше</div>`;drawTimeline(m);
+  $(m+"-metrics").innerHTML=`<div><b>${fmt(p.distance,0)}</b>усл. ед. перемещения</div><div><b>${fmt(p.planning_ms,3)} мс</b>вычисление плана</div><div><b>${p.states}</b>состояний в кэше</div>`;drawTimeline(m);
  });
- $("insight").textContent=key==="parallel"?"Почему 20 → 13? В базовом варианте короткое действие первой руки ждёт длительного действия второй. Точный поиск совмещает обе длительные операции: стадия 11 с, затем стадия 2 с. Общий путь при этом увеличивается с 2 до 3 единиц.":"Почему 6 → 6? Зависимость от открытия ящика и цепочки удержания ограничивают параллельность. Полный поиск не обещает выигрыша на каждом графе.";
+ $("insight").textContent=key==="parallel"?"В базовом расписании асимметрия длительностей приводит к ожиданию на границах стадий. Модификация совмещает длительные операции, затем короткие: 11 + 2 = 13 с вместо 9 + 11 = 20 с. Суммарное перемещение возрастает с 2 до 3 условных единиц.":"Зависимость размещения от открытия ящика и условия удержания ограничивают допустимую параллельность. Оба расписания завершаются за 6 с; в этом сценарии модификация не снижает итоговое время.";
  renderDetails();update();
 }
 function drawTimeline(m){
@@ -47,7 +47,7 @@ function status(m,a){
  const M=models[m];if(time>=M.plan.execution_seconds-1e-8)return"Задача завершена";
  const s=M.stages.find(s=>time>=s.start&&time<s.end);if(!s)return"Ожидание";
  const seg=M.segments.find(v=>v.arm===a&&time>=v.start&&time<v.end);
- if(!seg||seg.type==="idle")return"Ожидание окончания стадии";
+ if(!seg||seg.type==="idle")return"Ожидание синхронизации";
  return(seg.type==="move"?"Перемещение → ":"Операция: ")+label(seg.id);
 }
 function update(){
@@ -83,5 +83,5 @@ $("mean-gain").textContent="−"+fmt(S.mean_relative_reduction_percent,2)+"%";$(
 $("improved-bar").style.width=(100*S.improved/S.cases)+"%";$("equal-bar").style.width=(100*S.equal/S.cases)+"%";
 $("base-cost").textContent=fmt(S.mean_baseline_planning_ms,2)+" мс";$("opt-cost").textContent=fmt(S.mean_optimized_planning_ms,2)+" мс";
 const costMax=Math.max(S.mean_baseline_planning_ms,S.mean_optimized_planning_ms);$("base-cost-bar").style.width=100*S.mean_baseline_planning_ms/costMax+"%";$("opt-cost-bar").style.width=100*S.mean_optimized_planning_ms/costMax+"%";
-$("aggregate").textContent="Сокращение суммы времён исполнения: "+fmt(S.aggregate_reduction_percent,2)+"%. Измерения стоимости расчёта взяты из сохранённого запуска.";
+$("aggregate").textContent="Сокращение суммы времён исполнения: "+fmt(S.aggregate_reduction_percent,2)+"%. Время вычисления плана приведено по сохранённому запуску.";
 load();requestAnimationFrame(frame);
