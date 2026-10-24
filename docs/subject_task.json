@@ -1,0 +1,148 @@
+{
+  "schema_version": 1,
+  "label": "Уборка стола — учебная предметная задача",
+  "physical_actions": 11,
+  "logical_nodes": 1,
+  "tasks": [
+    {
+      "id": "take_apple",
+      "label": "Взять яблоко",
+      "kind": "occupy",
+      "chain": "apple",
+      "deps": [],
+      "lane": 0,
+      "arms": 1
+    },
+    {
+      "id": "put_apple",
+      "label": "Положить яблоко в тарелку",
+      "kind": "release",
+      "chain": "apple",
+      "deps": [
+        "take_apple"
+      ],
+      "lane": 0,
+      "arms": 1
+    },
+    {
+      "id": "take_lemon",
+      "label": "Взять лимон",
+      "kind": "occupy",
+      "chain": "lemon",
+      "deps": [],
+      "lane": 1,
+      "arms": 1
+    },
+    {
+      "id": "put_lemon",
+      "label": "Положить лимон в тарелку",
+      "kind": "release",
+      "chain": "lemon",
+      "deps": [
+        "take_lemon"
+      ],
+      "lane": 1,
+      "arms": 1
+    },
+    {
+      "id": "open_drawer",
+      "label": "Открыть ящик",
+      "kind": "operate",
+      "chain": "",
+      "deps": [],
+      "lane": 2,
+      "arms": 1
+    },
+    {
+      "id": "take_mug",
+      "label": "Взять кружку",
+      "kind": "occupy",
+      "chain": "mug",
+      "deps": [
+        "open_drawer"
+      ],
+      "lane": 2,
+      "arms": 1
+    },
+    {
+      "id": "put_mug",
+      "label": "Положить кружку в ящик",
+      "kind": "release",
+      "chain": "mug",
+      "deps": [
+        "take_mug",
+        "open_drawer"
+      ],
+      "lane": 2,
+      "arms": 1
+    },
+    {
+      "id": "take_sponge",
+      "label": "Взять губку",
+      "kind": "occupy",
+      "chain": "sponge",
+      "deps": [
+        "put_apple",
+        "put_lemon",
+        "put_mug",
+        "open_drawer"
+      ],
+      "lane": 1,
+      "arms": 1
+    },
+    {
+      "id": "wipe_table",
+      "label": "Протереть стол",
+      "kind": "tool",
+      "chain": "sponge",
+      "deps": [
+        "take_sponge",
+        "put_apple",
+        "put_lemon",
+        "put_mug"
+      ],
+      "lane": 1,
+      "arms": 1
+    },
+    {
+      "id": "put_sponge",
+      "label": "Положить губку в ящик",
+      "kind": "release",
+      "chain": "sponge",
+      "deps": [
+        "wipe_table",
+        "open_drawer"
+      ],
+      "lane": 1,
+      "arms": 1
+    },
+    {
+      "id": "close_drawer",
+      "label": "Закрыть ящик",
+      "kind": "operate",
+      "chain": "",
+      "deps": [
+        "put_mug",
+        "put_sponge"
+      ],
+      "lane": 2,
+      "arms": 1
+    },
+    {
+      "id": "end",
+      "label": "Завершение задачи",
+      "kind": "complete",
+      "chain": "",
+      "deps": [
+        "put_apple",
+        "put_lemon",
+        "close_drawer"
+      ],
+      "lane": 1,
+      "arms": 0
+    }
+  ],
+  "timing": null,
+  "schedule": null,
+  "note": "Самостоятельная структурная постановка. Не копия авторского графа. Координаты, длительности и расписания не заданы; JSON не является готовым входом существующего Planner."
+}
